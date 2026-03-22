@@ -123,7 +123,8 @@ O(N³)
   * затрат на **доступ к памяти**
   * особенностей **параллельного выполнения**
  * График зависимости Времени от объема матрицы
-<img width="628" height="566" alt="image" src="https://github.com/user-attachments/assets/0f47f12e-85b2-4112-984a-59ff143d3c1f" />
+<img width="953" height="575" alt="image" src="https://github.com/user-attachments/assets/cb00c382-bbc3-48c0-9fe8-721add9aeb56" />
+
 
 Использование **OpenMP** позволяет эффективно задействовать **все ядра процессора**, что значительно ускоряет вычисления.
 
