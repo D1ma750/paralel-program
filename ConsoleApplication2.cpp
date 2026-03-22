@@ -69,16 +69,11 @@ void export_results(const char* name, int sizes[], double times[], int count)
 {
     FILE* f = fopen(name, "w");
 
-    fprintf(f, "| Размер | Время |\n");
+    fprintf(f, "| Р Р°Р·РјРµСЂ | Р’СЂРµРјСЏ |\n");
     fprintf(f, "|-------|-------|\n");
 
     for (int i = 0; i < count; i++)
         fprintf(f, "| %d | %f |\n", sizes[i], times[i]);
-
-    fprintf(f, "\nCSV:\nРазмер,Время\n");
-
-    for (int i = 0; i < count; i++)
-        fprintf(f, "%d,%f\n", sizes[i], times[i]);
 
     fclose(f);
 }
@@ -94,20 +89,20 @@ int main()
 
     double* times = (double*)malloc(experiments * sizeof(double));
 
-    printf("Потоков доступно: %d\n", omp_get_max_threads());
+    printf("РџРѕС‚РѕРєРѕРІ РґРѕСЃС‚СѓРїРЅРѕ: %d\n", omp_get_max_threads());
     printf("----------------------------------------\n");
 
     for (int e = 0; e < experiments; e++)
     {
         int n = test_sizes[e];
 
-        printf("\nЭксперимент %d  |  размер %d x %d\n", e + 1, n, n);
+        printf("\nР­РєСЃРїРµСЂРёРјРµРЅС‚ %d  |  СЂР°Р·РјРµСЂ %d x %d\n", e + 1, n, n);
 
         double** A = create_matrix(n);
         double** B = create_matrix(n);
         double** C = create_matrix(n);
 
-        printf("Создание случайных матриц...\n");
+        printf("РЎРѕР·РґР°РЅРёРµ СЃР»СѓС‡Р°Р№РЅС‹С… РјР°С‚СЂРёС†...\n");
 
         fill_random(A, n);
         fill_random(B, n);
@@ -121,7 +116,7 @@ int main()
         save_matrix(nameA, A, n);
         save_matrix(nameB, B, n);
 
-        printf("Запуск умножения...\n");
+        printf("Р—Р°РїСѓСЃРє СѓРјРЅРѕР¶РµРЅРёСЏ...\n");
 
         double t1 = omp_get_wtime();
 
@@ -133,7 +128,7 @@ int main()
 
         times[e] = elapsed;
 
-        printf("Время: %f секунд\n", elapsed);
+        printf("Р’СЂРµРјСЏ: %f СЃРµРєСѓРЅРґ\n", elapsed);
 
         save_matrix(nameC, C, n);
 
@@ -144,14 +139,14 @@ int main()
         printf("----------------------------------------\n");
     }
 
-    printf("\nСохранение результатов...\n");
+    printf("\nРЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ...\n");
 
     export_results("experiment_results.txt", test_sizes, times, experiments);
 
-    printf("\nИтоговая таблица:\n");
+    printf("\nРС‚РѕРіРѕРІР°СЏ С‚Р°Р±Р»РёС†Р°:\n");
 
     printf("+------------+----------------------+\n");
-    printf("| Размер     | Время (сек)          |\n");
+    printf("| Р Р°Р·РјРµСЂ     | Р’СЂРµРјСЏ (СЃРµРє)          |\n");
     printf("+------------+----------------------+\n");
 
     for (int i = 0; i < experiments; i++)
@@ -161,7 +156,7 @@ int main()
 
     free(times);
 
-    printf("\nЭксперимент завершён\n");
+    printf("\nР­РєСЃРїРµСЂРёРјРµРЅС‚ Р·Р°РІРµСЂС€С‘РЅ\n");
 
     return 0;
 }
