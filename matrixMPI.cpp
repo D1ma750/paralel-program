@@ -22,7 +22,7 @@ void zero_matrix(double* m, int size)
         m[i] = 0.0;
 }
 
-// 🔥 БЛОЧНОЕ УМНОЖЕНИЕ
+//БЛОЧНОЕ УМНОЖЕНИЕ
 void multiply_blocked(double* A, double* B, double* C, int n, int rows)
 {
     int BS = 64;
@@ -43,7 +43,7 @@ void multiply_blocked(double* A, double* B, double* C, int n, int rows)
                     }
 }
 
-// 📄 запись результатов
+// запись результатов
 void append_results(const char* filename, int n, int proc, double time)
 {
     FILE* f = fopen(filename, "a");
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
             fill_random(B, n);
         }
 
-        // 🔥 Scatterv подготовка
+        
         int* sendcounts = (int*)malloc(size * sizeof(int));
         int* displs = (int*)malloc(size * sizeof(int));
 
@@ -115,7 +115,7 @@ int main(int argc, char** argv)
 
         zero_matrix(localC, local_size);
 
-        // 📡 передача данных
+       
         MPI_Bcast(B, n * n, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
         MPI_Scatterv(A, sendcounts, displs, MPI_DOUBLE,
